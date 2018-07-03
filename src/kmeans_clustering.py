@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import pickle
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
@@ -10,21 +11,14 @@ def kmeans_labeled(df, n_clusters):
     labeled_df['cluster'] = kmm.labels_
     return labeled_df, kmm
 
+
 if __name__=='__main__':
-    df = pd.read_csv('../data/Cal_climate_exp_phenotyped.csv')
-
-    # cols
-    cols = list(df.columns.drop(['Phenotype', 'SP', 'species']))
-
-    df_all = df.copy()
-    df_all.set_index('species', inplace=True)
-    df_all.drop(['SP', 'Phenotype'], axis=1, inplace=True)
+    # read df from pickle
+    df_all = pickle.load(open('pkl/df_all.pkl', 'rb'))
+    species_df = pickle.load(open('pkl/species_df.pkl', 'rb'))
 
     # Kmeans cluster on un-aggregated data
     all_labeled = kmeans_labeled(df_all, 22)
-
-    # df aggregated on species
-    species_df = df.groupby('species')[cols].mean()
 
     # kmeans cluster on species-aggregated data
     sp_labeled, kmm = kmeans_labeled(species_df, 3)
