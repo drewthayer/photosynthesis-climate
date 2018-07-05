@@ -4,6 +4,7 @@ import pickle
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+import pdb
 
 def scaled_df(df):
     scaler = StandardScaler()
@@ -18,22 +19,37 @@ def ranked_zip(labels, values, abs_vals=True):
         zipped = zip(labels, values)
     return sorted(zipped, key=lambda x: x[1], reverse=True)
 
-def ranked_components_plot(labels, values, title, abs_vals=True):
+def ranked_components_plot_ax(labels, values, title, ax, color, abs_vals=True):
+    ''' pca components plot, ranked by highest loading
+
+    inputs: labels: (list or pandas.core.indexes.base.Index)
+            values: (numpy array)
+            title: (string)
+            ax: (matplotlib axis)
+            abs_vals: flag, use absolute value or not'''
+
+    # sort components by value
     if abs_vals:
         zipped = zip(labels, abs(values))
     else:
         zipped = zip(labels, values)
     srted = sorted(zipped, key=lambda x: x[1], reverse=True)
 
-    # plot
+    # labels, values
     arr = np.array(srted)
-    idx = np.arange(arr.shape[0])
-    plt.barh(idx, arr[:,1])
-    plt.yticks(idx, arr[:,0])
-    plt.title(title)
-    plt.tight_layout()
-    plt.show()
+    labels = arr[:,0]
+    vals = arr[:,1]
+    vals = vals.astype(float)
+    # indices
+    idx = np.arange(len(vals))
+    idx = np.flip(idx, axis=0)
 
+    # plot
+    ax.barh(idx, vals, color=color)
+    #pdb.set_trace()
+    ax.set_yticks(idx)
+    ax.set_yticklabels(labels)
+    ax.set_title(title)
 
 if __name__=='__main__':
     # read df from pickle
@@ -61,7 +77,13 @@ if __name__=='__main__':
     # component loading plots
     pcs = {'pc1': comps[0,:],
             'pc2': comps[1,:]}
-    for pc in pcs:
-        ranked_components_plot(species_df.columns, pcs[pc], pc, abs_vals=True)
+
+    fig, ax = plt.subplots(1,2)
+    idx_axes = [0,1]
+    colors = ['b','g']
+    for pc, idx_ax, c in zip(pcs, idx_axes, colors):
+        ranked_components_plot_ax(species_df.columns, pcs[pc], pc, ax[idx_ax], c, abs_vals=True)
+    plt.tight_layout()
+    plt.show()
     #ranked_components_plot(species_df.columns, comps[0,:], title=pc[0], abs_vals=True)
     #ranked_components_plot(species_df.columns, comps[1,:], abs_vals=True)
