@@ -6,6 +6,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import pdb
 
+# imports for standard font size
+font = {'family' : 'normal',
+        'weight' : 'normal',
+        'size'   : 16}
+import matplotlib
+matplotlib.rc('font', **font)
+
 def scaled_df(df):
     scaler = StandardScaler()
     scaler.fit(df)
@@ -46,7 +53,6 @@ def ranked_components_plot_ax(labels, values, title, ax, color, abs_vals=True):
 
     # plot
     ax.barh(idx, vals, color=color)
-    #pdb.set_trace()
     ax.set_yticks(idx)
     ax.set_yticklabels(labels)
     ax.set_title(title)
@@ -85,5 +91,3 @@ if __name__=='__main__':
         ranked_components_plot_ax(species_df.columns, pcs[pc], pc, ax[idx_ax], c, abs_vals=True)
     plt.tight_layout()
     plt.show()
-    #ranked_components_plot(species_df.columns, comps[0,:], title=pc[0], abs_vals=True)
-    #ranked_components_plot(species_df.columns, comps[1,:], abs_vals=True)
