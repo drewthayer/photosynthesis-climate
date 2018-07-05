@@ -27,8 +27,8 @@
       - MeanAnnTemp
   - this dataset includes 8402 collections which represent 22 species
 
-### Primary Component Analysis (PCA): which general climatic factors most explain variation in species?
+### Principal Component Analysis (PCA): which general climatic factors most explain variation in species?
 
-From the __principal component loadings__ we can see that features related to rainfall explain the most variance in the data, followed by features related to sun hours and temperature. 
+From the __principal component loadings__ we can see that features related to rainfall explain the most variance in the data, followed by features related to sun hours and temperature.
 
 <img alt="pca loadings" src="/figs/pc1_pc2_components.png" size="300">
