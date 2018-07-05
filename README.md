@@ -1,12 +1,14 @@
-## project: photosynthesis-climate signal: clustering and dimensionality reduction
- This a side project to provide support for my wife's post-doctoral research, in collaboration with Brown University (RI, USA) and James Cook University (Queensland, Australia). The researchers study variations of CAM photosynthesis within succulent plants in Australia, and one hypothesis they're working with suggests that particular types of CAM photosynthesis should vary according to climatic signals, largely rainfall and temperature.
+## Photosynthesis-climate signal: clustering and dimensionality reduction
+ This a side project to support my wife's post-doctoral research. She collaborates with researcheres at Brown University (RI, USA) and James Cook University (Queensland, Australia) to study variations of CAM photosynthesis within succulent plants in Australia.
 
- Briefly, CAM photosynthesis is an adaptation from the globally common C3 photosynthesis which helps plants adapt to hot and/or dry environments. CAM's main mechanisms include closing stomata (respiration holes in leaves) during the day to avoid water loss, and storing photosynthetic energy during the day (as malic acid) for use during respiration (sugar production) at night. Cam plants are characterized by specific and unique chemical and physical adaptations which make these processes possible.
+  One hypothesis they're working with suggests that particular types of CAM photosynthesis should _vary according to climatic signals_, likely rainfall and temperature.
+
+ _Briefly, CAM photosynthesis is an adaptation from the globally common C3 photosynthesis which helps plants adapt to hot and/or dry environments. CAM's main mechanisms include closing stomata (respiration holes in leaves) during the day to avoid water loss, and storing photosynthetic energy during the day (as malic acid) for use during respiration (sugar production) at night. Cam plants are characterized by specific and unique chemical and physical adaptations which make these processes possible._
 
  There are three variants of CAM photosynthesis:
-  - full CAM: plants use CAM all the time
-  - facultative CAM: plants possess chemical and physical adaptations for CAM, but only use it some parts of the year
-  - low-level cam: plants use a low level of CAM most of the time
+  - __full CAM:__ plants use CAM all the time
+  - __facultative CAM:__ plants possess chemical and physical adaptations for CAM, but only use it some parts of the year
+  - __low-level cam:__ plants use a low level of CAM most of the time
 
 ### purpose:
  The purpose of this project is to use clustering and dimensionality reduction to find groups of CAM-evolved species that live within similar climate spaces.
