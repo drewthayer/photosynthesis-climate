@@ -39,7 +39,7 @@ From the __principal component loadings__ we can see that features related to ra
 
 __principal component reduction plot:__
 
-<img alt="pca xplot" src="/figs/pca_crossplot.png" size="300">
+<img alt="pca xplot" src="/figs/pca_crossplot.png" size="200">
 
 Although the first two principal components explain much of the variation in the data, they do not by themselves clearly separate the labeled phenotypes.
 
@@ -47,10 +47,10 @@ Although the first two principal components explain much of the variation in the
 
 Clustered into 3 groups, the data group as follows:
 
-<img alt="cluster" src="/figs/temp_precip_growseason.png" size="300">
+<img alt="cluster" src="/figs/temp_precip_growseason.png" size="200">
 
 Labeled by phenotype:
 
-<img alt="cluster" src="/figs/temp_precip_growseason_pheno.png" size="300">
+<img alt="cluster" src="/figs/temp_precip_growseason_pheno.png" size="200">
 
 These cluster labels do not correlate well with phenotype (only match in 13% of species)
