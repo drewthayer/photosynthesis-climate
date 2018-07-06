@@ -9,10 +9,10 @@ if __name__=='__main__':
     # df of all data, with species as index
     df_all = df.copy()
     df_all.set_index('species', inplace=True)
-    df_all.drop(['SP', 'Phenotype'], axis=1, inplace=True)
+    df_all.drop(['SP'], axis=1, inplace=True)
 
     # df aggregated on species
-    cols = list(df.columns.drop(['Phenotype', 'SP', 'species']))
+    cols = list(df.columns.drop(['SP', 'species']))
     species_df = df.groupby('species')[cols].mean()
 
     # save to pickle

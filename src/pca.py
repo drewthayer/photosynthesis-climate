@@ -14,6 +14,11 @@ import matplotlib
 matplotlib.rc('font', **font)
 
 def scaled_df(df):
+    ''' returns a pandas dataframe with data scaled by StandardScaler
+    requires: sklearn StandardScaler()
+    input: pandas df
+    output: pandas df
+    '''
     scaler = StandardScaler()
     scaler.fit(df)
     scaled_df = scaler.transform(df)
@@ -60,15 +65,16 @@ def ranked_components_plot_ax(labels, values, title, ax, color, abs_vals=True):
 if __name__=='__main__':
     # read df from pickle
     species_df = pickle.load(open('pkl/species_df.pkl', 'rb'))
+    phenotype = species_df.pop('Phenotype')
 
     # scale data
-    scaled = scaled_df(species_df)
+    X_scaled = scaled_df(species_df)
 
     # pca
     n_components = 2
     pca = PCA(n_components)
-    pca.fit(scaled)
-    df_new = pca.transform(scaled)
+    pca.fit(X_scaled)
+    X_reduced = pca.transform(X_scaled)
     comps = pca.components_
     print('PCA: {} components'.format(n_components))
 
@@ -89,5 +95,15 @@ if __name__=='__main__':
     colors = ['b','g']
     for pc, idx_ax, c in zip(pcs, idx_axes, colors):
         ranked_components_plot_ax(species_df.columns, pcs[pc], pc, ax[idx_ax], c, abs_vals=True)
+    plt.tight_layout()
+    plt.show()
+
+    # principal component plots
+    plt.scatter(X_reduced[:,0], X_reduced[:,1], marker='o', c=phenotype)
+    #plt.legend(['type1', 'type2', 'type3'])
+    plt.xlabel('PC 1')
+    plt.ylabel('PC 2')
+    cbar = plt.colorbar(ticks=[0, 1, 2])
+    cbar.ax.set_yticklabels(['phenotype 1', 'phenotype 2', 'phenotype 3'])
     plt.tight_layout()
     plt.show()
