@@ -35,11 +35,11 @@ The first and second principal components explain 60% and 34% of the variance in
 
 From the __principal component loadings__ we can see that features related to rainfall explain the most variance in the data, followed by features related to sun hours and temperature.
 
-<img alt="pca loadings" src="/figs/pc1_pc2_components.png" size="300">
+<img alt="pca loadings" src="/figs/pc1_pc2_components.png" width="400">
 
 __principal component reduction plot:__
 
-<img alt="pca xplot" src="/figs/pca_crossplot.png" size="200">
+<img alt="pca xplot" src="/figs/pca_crossplot.png" width="300">
 
 Although the first two principal components explain much of the variation in the data, they do not by themselves clearly separate the labeled phenotypes.
 
@@ -47,10 +47,10 @@ Although the first two principal components explain much of the variation in the
 
 Clustered into 3 groups, the data group as follows:
 
-<img alt="cluster" src="/figs/temp_precip_growseason.png" size="200">
+<img alt="cluster" src="/figs/temp_precip_growseason.png" width="300">
 
 Labeled by phenotype:
 
-<img alt="cluster" src="/figs/temp_precip_growseason_pheno.png" size="200">
+<img alt="cluster" src="/figs/temp_precip_growseason_pheno.png" width="300">
 
 These cluster labels do not correlate well with phenotype (only match in 13% of species)
