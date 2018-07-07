@@ -5,6 +5,8 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
 def kmeans_labeled(df, n_clusters):
+    ''' fit kmeans clustering to dataframe, return dataframe and
+    fitted estimator'''
     kmm = KMeans(n_clusters = n_clusters)
     kmm.fit(df)
     labeled_df = df.copy()
