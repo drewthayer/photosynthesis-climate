@@ -12,9 +12,9 @@
 
 ### goals:
  This project has two goals:
-    1. to use clustering and dimensionality reduction to find groups of CAM-evolved species that live within similar climate spaces.  
-
-    2. to see if certain phenotypes are selected for in certain environments -- basically asking, is there an adaptive advantage for plants to use these C3+CAM phenotypes in certain environments?
+ 
+   1. to use clustering and dimensionality reduction to find groups of CAM-evolved species that live within similar climate spaces.  
+   2. to see if certain phenotypes are selected for in certain environments -- basically asking, is there an adaptive advantage for plants to use these C3+CAM phenotypes in certain environments?
 
 
 ### data:
