@@ -38,6 +38,7 @@ if __name__=='__main__':
     plt.tight_layout()
     plt.show()
 
+
     # again, labeled by pre-labeled phenotype
     fig = plt.subplots(figsize=(7,5.5))
     plt.scatter(sp_labeled['seasonal_temp'], sp_labeled['seasonal_rain'],
@@ -72,3 +73,13 @@ if __name__=='__main__':
     plt.xlabel('mean annual temp [avg C]')
     plt.ylabel('avg annual rain [mm/year]')
     plt.show()
+
+    from matplotlib.patches import Ellipse
+
+    def plot_ellipse(mean, var, ec='k', alpha=1):
+        evals, evecs = np.linalg.eig(var)
+        ang = np.degrees(np.arctan2(*evecs[1]))
+        ell = Ellipse(mean, *np.abs(evals), angle=ang, fc='None', ec=ec, alpha=alpha)
+        plt.gca().add_artist(ell)
+
+    
