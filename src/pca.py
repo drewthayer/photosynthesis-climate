@@ -73,34 +73,44 @@ def kmeans_labeled(df, n_clusters):
     labeled_df['cluster'] = kmm.labels_
     return labeled_df, kmm
 
-    def intra_cluster_distance_manual(X, labels, label_dict):
-        ''' calculates euclidean distance norm for manually labeled clusters
-            in two dimensions (e.g. pc1, pc2)
+def intra_cluster_distance_manual(X, labels, label_dict):
+    ''' calculates euclidean distance norm for manually labeled clusters
+        in two dimensions (e.g. pc1, pc2)
 
-        inputs:
-        X: np array, shape (n_obs, 2)
-        labels: np array, shape (n_obs,), vals = integer labels
-        label_dict: dictionary mapping integer to string labels
+    inputs:
+    X: np array, shape (n_obs, 2)
+    labels: np array, shape (n_obs,), vals = integer labels
+    label_dict: dictionary mapping integer to string labels
 
-        output:
-        print: label, norm
-        '''
-        label_vals = np.unique(labels) # unique labeled values
-        classes = []
-        for val in label_vals:
-            # subset of data with same label
-            X_sub = X[labels == val]
-            # find center
-            C = np.array([X_sub[:,0].mean(), X_sub[:,1].mean()])
-            # compute euclidean distance norm
-            D = distance.cdist(X_sub, C.reshape(-1,1).T, 'euclidean')
-            norm = np.sqrt(np.sum(D**2))
-            classes.append((val, norm))
+    output:
+    print: label, norm
+    '''
+    label_vals = np.unique(labels) # unique labeled values
+    classes = []
+    for val in label_vals:
+        # subset of data with same label
+        X_sub = X[labels == val]
+        # find center
+        C = np.array([X_sub[:,0].mean(), X_sub[:,1].mean()])
+        # compute euclidean distance norm
+        D = distance.cdist(X_sub, C.reshape(-1,1).T, 'euclidean')
+        norm = np.sqrt(np.sum(D**2))
+        classes.append((val, norm))
 
-        # apply correct labels
-        for item in classes:
-            label = label_dict[item[0]]
-            print('{}: euclidean distance norm = {:0.3f}'.format(label, item[1]))
+    # apply correct labels
+    for item in classes:
+        label = label_dict[item[0]]
+        print('{}: euclidean distance norm = {:0.3f}'.format(label, item[1]))
+
+def pca_scatter_plot_2dim(X_reduced, labels, label_dict):
+    plt.scatter(X_reduced[:,0], X_reduced[:,1], marker='o', c=labels)
+    #plt.legend(['type1', 'type2', 'type3'])
+    plt.xlabel('PC 1')
+    plt.ylabel('PC 2')
+    cbar = plt.colorbar(ticks=[0, 1, 2])
+    cbar.ax.set_yticklabels([label_dict[1], label_dict[2], label_dict[3]])
+    plt.tight_layout()
+    plt.show()
 
 if __name__=='__main__':
     # read df from pickle
@@ -139,23 +149,17 @@ if __name__=='__main__':
     plt.show()
 
     # principal component scatter plot
-    plt.scatter(X_reduced[:,0], X_reduced[:,1], marker='o', c=phenotype)
-    #plt.legend(['type1', 'type2', 'type3'])
-    plt.xlabel('PC 1')
-    plt.ylabel('PC 2')
-    cbar = plt.colorbar(ticks=[0, 1, 2])
-    cbar.ax.set_yticklabels(['C3', 'constitutive', 'facultative'])
-    plt.tight_layout()
-    plt.show()
-
-    # intra-cluster distance for manually labeled clusters
     num_to_label = {1: 'C3', 2: 'constitutive', 3: 'facultative'}
     labels = phenotype.values
+    pca_scatter_plot_2dim(X_reduced, labels, num_to_label)
+
+    # intra-cluster distance for manually labeled clusters
     print('\n')
     intra_cluster_distance_manual(X_reduced, labels, num_to_label)
 
 
     # clustering on pca dimension-reduced data
+    print('\n')
     kmm = KMeans(n_clusters = 3)
     kmm.fit(X_reduced)
     labels = kmm.labels_
